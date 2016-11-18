@@ -2,7 +2,7 @@
 TiScreenRecorder
 ===========================================
 
-A simple Titanium module for iOS screen recording. (in progress) 
+A simple Appcelerator Titanium module for iOS screen recording. (in progress) 
 
 Currently saves video directly to the camera roll. 
 
