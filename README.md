@@ -28,7 +28,6 @@ IDEAS:
 
 - Show location of touches.
 
-   
 
 #### Usage
 
@@ -117,6 +116,7 @@ win.open();
 
 **Credit** : 
 
+- ASScreenRecorder : https://github.com/alskipp/ASScreenRecorder
 - For the inspiration in an unrelated test app by @mattbierner - https://github.com/mattbierner/tenome-app
 - For the instructions to show how to enable ARC only on selected (required) files in Titanium modules. - http://www.itexico.com/blog/bid/100221/Mobile-App-Development-Advanced-Tricks-For-iOS-Modules-In-Appcelerator-Titanium
 
