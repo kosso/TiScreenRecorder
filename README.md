@@ -112,7 +112,7 @@ screenrecorder.addEventListener('success', function(e){
 // Just something to record... 
 
 var wv = Ti.UI.createWebView({
-	url : 'http://nextnext.com',
+	url : 'http://www.bbc.co.uk/news',
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL,
 	backgroundColor: '#eee',
@@ -123,7 +123,6 @@ win.add(wv);
 win.add(btn_rec);
 
 win.open();
-
 ```
 
 
