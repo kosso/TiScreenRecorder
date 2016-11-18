@@ -2,16 +2,23 @@
 TiScreenRecorder
 ===========================================
 
-A simple Titanium module for iOS screen recording. (in progress) 
-
-Currently saves video directly to the camera roll. 
+A simple Appcelerator Titanium module for iOS screen recording. (in progress) 
 
 
 
-**TODO**: 
+IDEAS:
 
-- Provide custom file path for saved video file.
-- Optional camera roll save.
+- Hide recording button when starting. Add a shake gesture to stop recording.
+
+- Add audio recording.
+
+- Allow specifying an area of screen to record.
+
+- Generate a GIF ;) 
+
+- Show location of touches.
+
+  ​
 
 
 #### Usage
@@ -19,6 +26,7 @@ Currently saves video directly to the camera roll.
 Example app.js
 
 ```javascript
+
 
 // TiScreenRecorder : example app. 
 // @kosso : November 2016
@@ -60,6 +68,8 @@ var btn_rec = Ti.UI.createButton({
 	  backgroundColor: '#990000'
 });
 
+
+
 btn_rec.addEventListener('click', function(){
 
 	if(isRecording){
@@ -68,20 +78,41 @@ btn_rec.addEventListener('click', function(){
 	  	setTimeout(function(){
 	  		label.text = 'ready';
 	  	}, 3000);
-	 	// TODO : Fire 'done' event from module when done...
 
 	} else {
-	 	screenrecorder.startRecording();
+
+		var d = new Date();
+		var filename = 'recording_'+d.getTime()+'.mp4';
+		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, filename);
+		if ( file.exists() ) {
+		     file.deleteFile();
+		}
+		var video_url = file.nativePath; // eg: file:///etc/etc...
+		file = null;
+		console.log('video_url : ', video_url);
+
+			
+	 	screenrecorder.startRecording(video_url);
+	 	// To just automatically save the video to the Camera Roll, leave out the video url 
+	 	// eg: screenrecorder.startRecording();
+
 	 	label.text = 'recording';
 		
 	}
 	isRecording = !isRecording;
 });
 
+
+screenrecorder.addEventListener('success', function(e){
+	console.log('screen recording done! : ', e);
+	// Saved video is at e.nativePath (if a video_url was set)
+
+});
+
 // Just something to record... 
 
 var wv = Ti.UI.createWebView({
-	url : 'http://www.bbc.co.uk/news',
+	url : 'http://nextnext.com',
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL,
 	backgroundColor: '#eee',
@@ -101,7 +132,8 @@ win.open();
 
 **Credit** : 
 
-- For the inspiration in am unrelated test app by @mattbierner - https://github.com/mattbierner/tenome-app
+- ASScreenRecorder : https://github.com/alskipp/ASScreenRecorder
+- For the inspiration in an unrelated test app by @mattbierner - https://github.com/mattbierner/tenome-app
 - For the instructions to show how to enable ARC only on selected (required) files in Titanium modules. - http://www.itexico.com/blog/bid/100221/Mobile-App-Development-Advanced-Tricks-For-iOS-Modules-In-Appcelerator-Titanium
 
 ------

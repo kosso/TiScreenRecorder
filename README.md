@@ -4,16 +4,6 @@ TiScreenRecorder
 
 A simple Appcelerator Titanium module for iOS screen recording. (in progress) 
 
-Currently saves video directly to the camera roll. 
-
-
-
-**TODO**: 
-
-- Provide custom file path for saved video file.
-- Optional camera roll save.
-
-
 
 
 IDEAS:
@@ -28,12 +18,15 @@ IDEAS:
 
 - Show location of touches.
 
+  ​
+
 
 #### Usage
 
 Example app.js
 
 ```javascript
+
 
 // TiScreenRecorder : example app. 
 // @kosso : November 2016
@@ -75,6 +68,8 @@ var btn_rec = Ti.UI.createButton({
 	  backgroundColor: '#990000'
 });
 
+
+
 btn_rec.addEventListener('click', function(){
 
 	if(isRecording){
@@ -83,20 +78,41 @@ btn_rec.addEventListener('click', function(){
 	  	setTimeout(function(){
 	  		label.text = 'ready';
 	  	}, 3000);
-	 	// TODO : Fire 'done' event from module when done...
 
 	} else {
-	 	screenrecorder.startRecording();
+
+		var d = new Date();
+		var filename = 'recording_'+d.getTime()+'.mp4';
+		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, filename);
+		if ( file.exists() ) {
+		     file.deleteFile();
+		}
+		var video_url = file.nativePath; // eg: file:///etc/etc...
+		file = null;
+		console.log('video_url : ', video_url);
+
+			
+	 	screenrecorder.startRecording(video_url);
+	 	// To just automatically save the video to the Camera Roll, leave out the video url 
+	 	// eg: screenrecorder.startRecording();
+
 	 	label.text = 'recording';
 		
 	}
 	isRecording = !isRecording;
 });
 
+
+screenrecorder.addEventListener('success', function(e){
+	console.log('screen recording done! : ', e);
+	// Saved video is at e.nativePath (if a video_url was set)
+
+});
+
 // Just something to record... 
 
 var wv = Ti.UI.createWebView({
-	url : 'http://www.bbc.co.uk/news',
+	url : 'http://nextnext.com',
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL,
 	backgroundColor: '#eee',

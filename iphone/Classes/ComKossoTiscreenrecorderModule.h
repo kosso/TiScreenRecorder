@@ -11,7 +11,6 @@
 @interface ComKossoTiscreenrecorderModule : TiModule
 {
     ASScreenRecorder *recorder;
-    NSURL * _path;
 }
 
 @end

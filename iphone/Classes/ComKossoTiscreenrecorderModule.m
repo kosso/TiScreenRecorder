@@ -32,9 +32,9 @@
 
 -(void)startup
 {
-	// this method is called when the module is first loaded
-	// you *must* call the superclass
-	
+    
+
+    
     [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
@@ -44,6 +44,8 @@
     [super startup];
     
 	NSLog(@"[INFO] %@ loaded",self);
+
+
 }
 
 -(void)shutdown:(id)sender
@@ -103,10 +105,20 @@
 -(void)startRecording:(id)args
 {
 
-    NSLog(@"[INFO] start");
+    NSLog(@"[INFO] start recording");
+
+    NSURL *videoUrl = nil;
+
+    if ([args count] == 1) {
+        videoUrl = [NSURL URLWithString:[TiUtils stringValue:[args objectAtIndex:0]]];
+        ENSURE_TYPE(videoUrl, NSURL);
+    }
     
     ASScreenRecorder *_recorder = [ASScreenRecorder sharedInstance];
     if (!_recorder.isRecording) {
+        if(videoUrl){
+            _recorder.videoURL = videoUrl;
+        }
         [_recorder startRecording];
     }
     
@@ -115,20 +127,27 @@
 -(void)stopRecording:(id)args
 {
     
-    NSLog(@"[INFO] stop");
+    NSLog(@"[INFO] stopping recording");
 
-    
     ASScreenRecorder *_recorder = [ASScreenRecorder sharedInstance];
     if (!_recorder.isRecording) {
         return;
     }
     
     [_recorder stopRecordingWithCompletion:^{
-        NSLog(@"[INFO] recording done and saved in camera roll");
-        // Fire 'done' event
+        NSLog(@"[INFO] recording saved");
+
+        if([self _hasListeners:@"success"]){
+            NSDictionary *event = nil;
+            if(_recorder.videoURL){
+                event = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                       _recorder.videoURL.absoluteString, @"nativePath",
+                                       nil];
+            }
+            [self fireEvent:@"success" withObject:event];
+
+        }
     }];
-    
-    
 }
 
 -(BOOL)isRecording:(id)args
