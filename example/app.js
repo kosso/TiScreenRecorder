@@ -1,25 +1,4 @@
 
-TiScreenRecorder
-===========================================
-
-A simple Titanium module for iOS screen recording. (in progress) 
-
-Currently saves video directly to the camera roll. 
-
-
-
-**TODO**: 
-
-- Provide custom file path for saved video file.
-- Optional camera roll save.
-
-
-#### Usage
-
-Example app.js
-
-```javascript
-
 // TiScreenRecorder : example app. 
 // @kosso : November 2016
 
@@ -92,19 +71,3 @@ win.add(wv);
 win.add(btn_rec);
 
 win.open();
-
-```
-
-
-
--------
-
-**Credit** : 
-
-- For the inspiration in am unrelated test app by @mattbierner - https://github.com/mattbierner/tenome-app
-- For the instructions to show how to enable ARC only on selected (required) files in Titanium modules. - http://www.itexico.com/blog/bid/100221/Mobile-App-Development-Advanced-Tricks-For-iOS-Modules-In-Appcelerator-Titanium
-
-------
-
-**Author** : @kosso - November 2016
-

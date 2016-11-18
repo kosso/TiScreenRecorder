@@ -1,0 +1,3 @@
+// Framework requirements
+
+OTHER_LDFLAGS=$(inherited) -framework AVFoundation -framework AssetsLibrary -framework QuartzCore
