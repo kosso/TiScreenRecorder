@@ -2,24 +2,9 @@
 TiScreenRecorder
 ===========================================
 
-A simple Appcelerator Titanium module for iOS screen recording. (in progress) 
+A simple Appcelerator Titanium module for iOS screen recording.
 
-
-
-IDEAS:
-
-- Hide recording button when starting. Add a shake gesture to stop recording.
-
-- Add audio recording.
-
-- Allow specifying an area of screen to record.
-
-- Generate a GIF ;) 
-
-- Show location of touches.
-
-  ​
-
+---------
 
 #### Usage
 
@@ -125,7 +110,21 @@ win.add(btn_rec);
 win.open();
 ```
 
+---------------
 
+Ideas:
+
+- Hide recording button when starting. Add a shake gesture to stop recording.
+
+- Add audio recording.
+
+- Allow specifying an area of screen to record.
+
+- Generate a GIF ;) 
+
+- Show location of touches.
+
+  ​
 
 -------
 
