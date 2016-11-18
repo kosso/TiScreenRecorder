@@ -26,6 +26,8 @@ IDEAS:
 
 - Generate a GIF ;) 
 
+- Show location of touches.
+
    
 
 #### Usage
