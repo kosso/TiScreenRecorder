@@ -14,6 +14,20 @@ Currently saves video directly to the camera roll.
 - Optional camera roll save.
 
 
+
+
+IDEAS:
+
+- Hide recording button when starting. Add a shake gesture to stop recording.
+
+- Add audio recording.
+
+- Allow specifying an area of screen to record.
+
+- Generate a GIF ;) 
+
+   
+
 #### Usage
 
 Example app.js
